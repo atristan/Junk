@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        var socket;
+
+        function onLoad() {
+            socket = io.connect();
+            // Listen for a timer event
+            socket.on('timer', function (data) {
+                document.getElementById('timer').innerHTML = data;
+            });
+        };
+
+        function submitData() {
+            var data = document.getElementById('inputdata').value;
+            // Emit submit event
+            socket.emit('submit', data);
+        };
+    </script>
+</head>
+<body onload="onLoad();">
+    <h1>Sample Web Socket Page</h1>
+    <p>Timer: <span id="timer"></span></p>
+    <form action="#">
+        <p>Data: <input type="text" id="inputdata" /></p>
+    </form>
+</body>
+</html>
